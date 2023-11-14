@@ -1,7 +1,11 @@
+import React from 'react';
+import { Layout } from './components/layout/Layout';
+import { Events } from './components/events/Events';
+
 export function App() {
     return (
-        <h1 class="text-4xl underline text-red-500 border-2 border-red-600">
-            Hello world!
-        </h1>
+        <Layout>
+            <Events />
+        </Layout>
     );
-  }
+}
