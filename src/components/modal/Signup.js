@@ -1,19 +1,19 @@
 import React, { useState, Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
+import { NavLink } from 'react-router-dom';
 
-export function LoginDialog() {
+export function SignupDialog() {
     let [isOpen, setIsOpen] = useState(false)
 
-    function closeLoginModal() {
+    function closeSignupModal() {
         setIsOpen(false)
     }
 
-    function openLoginModal() {
+    function openSignupModal() {
         setIsOpen(true)
     }
 
-    function handleLogin() {
+    function handleSignup() {
 
     }
 
@@ -22,15 +22,15 @@ export function LoginDialog() {
       <div>
         <button
           type="button"
-          onClick={openLoginModal}
+          onClick={openSignupModal}
           className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
         >
-          Login
+          Signup
         </button>
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeLoginModal}>
+        <Dialog as="div" className="relative z-10" onClose={closeSignupModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -54,17 +54,17 @@ export function LoginDialog() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-sm transform overflow-hidden rounded-2xl bg-white p-6 text-center align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-center align-middle shadow-xl transition-all">
                   <Dialog.Title as="h3" className="text-3xl font-medium leading-6 text-gray-900 mt-4">
-                    Login
+                    Sign Up
                   </Dialog.Title>
                   <div className="flex flex-col items-center">
                     <section className="flex flex-col items-left mt-4 md:mt-8 w-11/12">
                         <label className="flex justify-start">Username or Email:</label>
                         <input 
                             className="h-5 md:h-8 rounded text-xs md:text-base p-1 md:p-2 border-2"
-                            // value={loginEmail} 
-                            // onChange={(e) => setLoginEmail(e.target.value)} 
+                            // value={SignupEmail} 
+                            // onChange={(e) => setSignupEmail(e.target.value)} 
                             type="text" 
                             name="email" 
                             required
@@ -74,12 +74,25 @@ export function LoginDialog() {
                     <section className="flex flex-col justify-right mt-1 md:mt-4 w-11/12">
                         <div className="flex justify-between items-end">
                             <label>Password:</label>
-                            <NavLink to="/" className="hover:underline text-[0.6rem] md:text-xs">Forgot Password?</NavLink>
                         </div>
                         <input 
                             className="h-5 md:h-8 rounded text-xs md:text-base p-1 md:p-2 border-2"
-                            // value={loginPassword} 
-                            // onChange={(e) => setLoginPassword(e.target.value)} 
+                            // value={SignupPassword} 
+                            // onChange={(e) => setSignupPassword(e.target.value)} 
+                            type="password" 
+                            name="password" 
+                            required
+                        />
+                    </section>
+
+                    <section className="flex flex-col justify-right mt-1 md:mt-4 w-11/12">
+                        <div className="flex justify-between items-end">
+                            <label>Confirm Password:</label>
+                        </div>
+                        <input 
+                            className="h-5 md:h-8 rounded text-xs md:text-base p-1 md:p-2 border-2"
+                            // value={SignupPassword} 
+                            // onChange={(e) => setSignupPassword(e.target.value)} 
                             type="password" 
                             name="password" 
                             required
@@ -92,14 +105,14 @@ export function LoginDialog() {
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={handleLogin}
+                      onClick={handleSignup}
                     >
-                      Login
+                      Sign Up
                     </button>
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeLoginModal}
+                      onClick={closeSignupModal}
                     >
                       Cancel
                     </button>
