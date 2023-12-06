@@ -23,7 +23,7 @@ export function LoginDialog() {
         <button
           type="button"
           onClick={openLoginModal}
-          className="rounded-md bg-sky-300 hover:bg-sky-400 px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+          className="rounded-md bg-sky-300 hover:bg-sky-400 px-4 py-2 text-xs md:text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
         >
           Login
         </button>
