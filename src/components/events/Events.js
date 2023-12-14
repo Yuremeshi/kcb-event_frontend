@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import CheckIcon from '../svg/checkmarkSVG';
 import XmarkIcon from '../svg/xmarkSVG';
 
@@ -9,13 +10,15 @@ const event2 = {"guid": 2, "name": "Six Flags Trip", "location": "Six Flags New 
 const events = [event1, event2];
 
 export const Events = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="flex flex-grow flex-col items-center max-w-[1200px] bg-wood-pattern min-h-100% h-fit">
             <div className="flex flex-col items-center pt-40 w-full gap-10">
                 {events && (events.length > 0) && events.map((event, index) =>
-                    <div className="flex flex-grow max-w-[1100px] w-full h-[100px] md:h-[180px] bg-paper-pattern rounded-sm gap-1 md:gap-4">
+                    <div className="flex flex-grow max-w-[1100px] w-full h-[100px] md:h-[180px] bg-paper-pattern rounded-sm gap-1 md:gap-4 hover:shadow-[0_0_30px_0_rgba(255,255,255,0.2)] hover:cursor-pointer group" onClick={() => navigate("/eventdetails")}>
                         <div className="flex">
-                            <img className="h-full w-28 md:w-64 md:opacity-60 hover:opacity-100 hover:cursor-pointer" src={ event.image } />
+                            <img className="h-full w-28 md:w-64 md:opacity-60 group-hover:opacity-100" src={ event.image } />
                         </div>
                         <div className="flex flex-col justify-end mb-1 md:mb-2">
                             <div className="md:text-xl">
@@ -41,8 +44,8 @@ export const Events = () => {
                                 </div>
                             </div>
                             <div className="flex md:flex-grow justify-end items-end mr-3 md:mr-4 mb-1 md:mb-4 gap-2">
-                                <button className="flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center"><CheckIcon /></button>
-                                <button className="flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center"><XmarkIcon /></button>
+                                <button className="flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center"><CheckIcon /></button>
+                                <button className="flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center"><XmarkIcon /></button>
                             </div>
                         </div>
                     </div>
