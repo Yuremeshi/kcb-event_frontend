@@ -13,7 +13,7 @@ export function App() {
                 <Route path='/' element={
                     <Events />
                 }/>
-                <Route path='/eventdetails/' element={
+                <Route path='/eventdetails/*' element={
                     <Details />
                 }/>
             </Routes>

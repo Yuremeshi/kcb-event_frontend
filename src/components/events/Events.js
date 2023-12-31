@@ -7,7 +7,7 @@ const event1 = {"guid": 1, "name": "Church Picnic", "location": "Larz Anderson P
 
 const event2 = {"guid": 2, "name": "Six Flags Trip", "location": "Six Flags New England", "description": "A trip to Six Flags", "image": "https://upload.wikimedia.org/wikipedia/commons/9/9c/VR_Coaster_Train_at_Six_Flags_New_England.jpg", "startTime": {"year": "2024", "month": "June", "day": "24"}, "created": "April 20, 2024", "modified": "April 20, 2024", "deleted": "false"};
 
-const events = [event1, event2];
+export const events = [event1, event2];
 
 export const Events = () => {
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ export const Events = () => {
         <div className="flex flex-grow flex-col items-center max-w-[1200px] bg-wood-pattern min-h-100% h-fit">
             <div className="flex flex-col items-center pt-40 w-full gap-10">
                 {events && (events.length > 0) && events.map((event, index) =>
-                    <div className="flex flex-grow max-w-[1100px] w-full h-[100px] md:h-[180px] bg-paper-pattern rounded-sm gap-1 md:gap-4 hover:shadow-[0_0_30px_0_rgba(255,255,255,0.2)] hover:cursor-pointer group" onClick={() => navigate("/eventdetails")}>
+                    <div className="flex flex-grow max-w-[1100px] w-full h-[100px] md:h-[180px] bg-paper-pattern rounded-sm gap-1 md:gap-4 hover:shadow-[0_0_30px_0_rgba(255,255,255,0.2)] hover:cursor-pointer group" onClick={() => navigate(`/eventdetails/id=${ event.guid }`)}>
                         <div className="flex">
                             <img className="h-full w-28 md:w-64 md:opacity-60 group-hover:opacity-100" src={ event.image } />
                         </div>
