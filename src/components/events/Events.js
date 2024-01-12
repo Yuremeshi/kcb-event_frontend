@@ -7,9 +7,9 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
 
-const event1 = {"guid": 1, "name": "Church Picnic", "location": "Larz Anderson Park", "description": "Awesome Picnic", "image": "https://media-cdn.tripadvisor.com/media/photo-s/02/65/7a/27/filename-temple-of-love.jpg", "startTime": {"year": "2024", "month": "May", "day": "6"}, "created": "May 20, 2024", "modified": "May 20, 2024", "deleted": "false"};
+const event1 = {"guid": 1, "name": "Church Picnic", "location": "Larz Anderson Park", "description": "Awesome Picnic", "image": "https://media-cdn.tripadvisor.com/media/photo-s/02/65/7a/27/filename-temple-of-love.jpg", "organization": "Young Married Couples Group", "startTime": {"year": "2024", "month": "May", "day": "6"}, "created": "May 20, 2024", "modified": "May 20, 2024", "deleted": "false"};
 
-const event2 = {"guid": 2, "name": "Six Flags Trip", "location": "Six Flags New England", "description": "A trip to Six Flags", "image": "https://upload.wikimedia.org/wikipedia/commons/9/9c/VR_Coaster_Train_at_Six_Flags_New_England.jpg", "startTime": {"year": "2024", "month": "June", "day": "24"}, "created": "April 20, 2024", "modified": "April 20, 2024", "deleted": "false"};
+const event2 = {"guid": 2, "name": "Six Flags Trip", "location": "Six Flags New England", "description": "A trip to Six Flags", "image": "https://upload.wikimedia.org/wikipedia/commons/9/9c/VR_Coaster_Train_at_Six_Flags_New_England.jpg", "organization": "Young Adult Group 2", "startTime": {"year": "2024", "month": "June", "day": "24"}, "created": "April 20, 2024", "modified": "April 20, 2024", "deleted": "false"};
 
 export const events = [event1, event2];
 
@@ -21,7 +21,8 @@ export const Events = () => {
         location: '',
         description: '',
         image: '',
-        startTime: ''
+        startTime: '',
+        organization: '',
     });
 
     let [isOpen, setIsOpen] = useState(false)
@@ -50,7 +51,8 @@ export const Events = () => {
                         location: event.location,
                         description: event.description,
                         image: event.image,
-                        startTime: event.startTime
+                        startTime: event.startTime,
+                        organization: event.organization
                     })}>
                         <div className="flex">
                             <img className="h-full w-28 md:w-64 md:opacity-60 group-hover:opacity-100" src={ event.image } />
@@ -117,22 +119,59 @@ export const Events = () => {
                                 </Dialog.Title>
                                 <div className="flex flex-col pt-5 w-full gap-10">
                                     <div className="flex flex-grow w-full bg-white rounded-sm gap-1 md:gap-4 hover:shadow-[0_0_30px_0_rgba(255,255,255,0.2)] group">
-                                        <div className="flex gap-4">
+                                        <div className="flex gap-10">
                                             <div className="flex flex-col">
                                                 <img className="w-28 md:w-96 rounded-sm" src={ selected.image } />
                                             </div>
-                                            <div className="flex flex-col items-start">
+                                            <div className="flex flex-col items-start gap-4">
                                                 <div className="flex font-light text-4xl">
                                                     { selected.name }
                                                 </div>
-                                                <div>
-                                                    Location: { selected.location }
-                                                </div>
-                                                <div>
-                                                    Description: { selected.description }
-                                                </div>
-                                                <div>
-                                                    Date: { selected.startTime.month } { selected.startTime.day }, { selected.startTime.year }
+                                                <div className="flex flex-col items-start ml-4 gap-2">
+                                                    <div className="flex gap-5 items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="20" viewBox="0 0 640 512"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/></svg>
+                                                        <div className="flex flex-col items-start">
+                                                            <div className="font-semibold text-sm">
+                                                                Organization
+                                                            </div> 
+                                                            <div>
+                                                                { selected.organization }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex gap-6 items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512" className="ml-[4px]"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
+                                                        <div className="flex flex-col items-start">
+                                                            <div className="font-semibold text-sm">
+                                                                Location
+                                                            </div> 
+                                                            <div>
+                                                                { selected.location }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex gap-6 items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512" className="ml-[2px]"><path d="M96 32V64H48C21.5 64 0 85.5 0 112v48H448V112c0-26.5-21.5-48-48-48H352V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H160V32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192H0V464c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V192z"/></svg>
+                                                        <div className="flex flex-col items-start">
+                                                            <div className="font-semibold text-sm">
+                                                                Date
+                                                            </div> 
+                                                            <div>
+                                                                { selected.startTime.month } { selected.startTime.day }, { selected.startTime.year }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex gap-7 items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="6" viewBox="0 0 192 512" className="ml-[6px]"><path d="M48 80a48 48 0 1 1 96 0A48 48 0 1 1 48 80zM0 224c0-17.7 14.3-32 32-32H96c17.7 0 32 14.3 32 32V448h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H64V256H32c-17.7 0-32-14.3-32-32z"/></svg>
+                                                        <div className="flex flex-col items-start">
+                                                            <div className="font-semibold text-sm">
+                                                                Description
+                                                            </div> 
+                                                            <div>
+                                                                { selected.description }
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
