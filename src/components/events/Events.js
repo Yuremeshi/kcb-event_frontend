@@ -7,9 +7,9 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
 
-const event1 = {"guid": 1, "name": "Church Picnic", "location": "Larz Anderson Park", "description": "Awesome Picnic", "image": "https://media-cdn.tripadvisor.com/media/photo-s/02/65/7a/27/filename-temple-of-love.jpg", "organization": "Young Married Couples Group", "startTime": {"year": "2024", "month": "May", "day": "6"}, "created": "May 20, 2024", "modified": "May 20, 2024", "deleted": "false"};
+const event1 = {"guid": 1, "name": "Church Picnic", "location": "Larz Anderson Park", "description": "Picnic hosted by Young Married Couples Group that will take place at Larz Anderson Park.  Come join us for good food, fun and games!", "image": "https://media-cdn.tripadvisor.com/media/photo-s/02/65/7a/27/filename-temple-of-love.jpg", "organization": "Young Married Couples Group", "total": 40, "going": 26, "notgoing": 14, "startTime": {"year": "2024", "month": "May", "day": "6", "starthour": "1:30 P.M. EDT", "endhour": "4:30 P.M. EDT"}, "created": "May 20, 2024", "modified": "May 20, 2024", "deleted": "false"};
 
-const event2 = {"guid": 2, "name": "Six Flags Trip", "location": "Six Flags New England", "description": "A trip to Six Flags", "image": "https://upload.wikimedia.org/wikipedia/commons/9/9c/VR_Coaster_Train_at_Six_Flags_New_England.jpg", "organization": "Young Adult Group 2", "startTime": {"year": "2024", "month": "June", "day": "24"}, "created": "April 20, 2024", "modified": "April 20, 2024", "deleted": "false"};
+const event2 = {"guid": 2, "name": "Six Flags Trip", "location": "Six Flags New England", "description": "A trip to Six Flags New England hosted by Young Adult Group 2.  Come join us for fun rides and overpriced theme park food.  The Harley Quinn ride is especially recommended!", "image": "https://upload.wikimedia.org/wikipedia/commons/9/9c/VR_Coaster_Train_at_Six_Flags_New_England.jpg", "organization": "Young Adult Group 2", "total": 23, "going": 12, "notgoing": 11, "startTime": {"year": "2024", "month": "June", "day": "24", "starthour": "8:00 A.M. EDT", "endhour": "9:00 P.M. EDT"}, "created": "April 20, 2024", "modified": "April 20, 2024", "deleted": "false"};
 
 export const events = [event1, event2];
 
@@ -23,6 +23,9 @@ export const Events = () => {
         image: '',
         startTime: '',
         organization: '',
+        total: '',
+        going: '',
+        notgoing: ''
     });
 
     let [isOpen, setIsOpen] = useState(false)
@@ -52,7 +55,10 @@ export const Events = () => {
                         description: event.description,
                         image: event.image,
                         startTime: event.startTime,
-                        organization: event.organization
+                        organization: event.organization,
+                        total: event.total,
+                        going: event.going,
+                        notgoing: event.notgoing
                     })}>
                         <div className="flex">
                             <img className="h-full w-28 md:w-64 md:opacity-60 group-hover:opacity-100" src={ event.image } />
@@ -77,7 +83,7 @@ export const Events = () => {
                                     Location: { event.location }
                                 </div>
                                 <div className="text-xs md:text-base">
-                                    Description: { event.description}
+                                    Organization: { event.organization }
                                 </div>
                             </div>
                             <div className="flex md:flex-grow justify-end items-end mr-3 md:mr-4 mb-1 md:mb-4 gap-2">
@@ -113,7 +119,7 @@ export const Events = () => {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-6xl transform overflow-hidden rounded-2xl bg-white p-4 text-center align-middle shadow-xl transition-all">
+                                <Dialog.Panel className="w-full max-w-7xl transform overflow-hidden rounded-2xl bg-white p-10 text-center align-middle shadow-xl transition-all">
                                 <Dialog.Title as="h3" className="text-3xl text-left font-medium leading-6 text-gray-900">
                                     Event Details
                                 </Dialog.Title>
@@ -154,20 +160,31 @@ export const Events = () => {
                                                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512" className="ml-[2px]"><path d="M96 32V64H48C21.5 64 0 85.5 0 112v48H448V112c0-26.5-21.5-48-48-48H352V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H160V32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192H0V464c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V192z"/></svg>
                                                         <div className="flex flex-col items-start">
                                                             <div className="font-semibold text-sm">
-                                                                Date
+                                                                Begins
                                                             </div> 
                                                             <div>
-                                                                { selected.startTime.month } { selected.startTime.day }, { selected.startTime.year }
+                                                                { selected.startTime.month } { selected.startTime.day }, { selected.startTime.year } { selected.startTime.starthour }
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="flex gap-7 items-center">
+                                                    <div className="flex gap-6 items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512" className="ml-[2px]"><path d="M96 32V64H48C21.5 64 0 85.5 0 112v48H448V112c0-26.5-21.5-48-48-48H352V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H160V32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192H0V464c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V192z"/></svg>
+                                                        <div className="flex flex-col items-start">
+                                                            <div className="font-semibold text-sm">
+                                                                Ends
+                                                            </div> 
+                                                            <div>
+                                                                { selected.startTime.month } { selected.startTime.day }, { selected.startTime.year } { selected.startTime.endhour }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex gap-7 items-center w-10/12">
                                                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="6" viewBox="0 0 192 512" className="ml-[6px]"><path d="M48 80a48 48 0 1 1 96 0A48 48 0 1 1 48 80zM0 224c0-17.7 14.3-32 32-32H96c17.7 0 32 14.3 32 32V448h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H64V256H32c-17.7 0-32-14.3-32-32z"/></svg>
                                                         <div className="flex flex-col items-start">
                                                             <div className="font-semibold text-sm">
                                                                 Description
                                                             </div> 
-                                                            <div>
+                                                            <div className="text-left">
                                                                 { selected.description }
                                                             </div>
                                                         </div>
