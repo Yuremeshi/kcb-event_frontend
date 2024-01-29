@@ -41,14 +41,22 @@ export const Events = () => {
     },[selected]);
 
     function handleDetail() {
+        
+    }
 
+    function voteSubmitYes() {
+        alert("Voted Go");
+    }
+
+    function voteSubmitNo() {
+        alert("Voted Not");
     }
 
     return (
         <div className="flex flex-grow flex-col items-center max-w-[1200px] bg-wood-pattern min-h-100% h-fit">
             <div className="flex flex-col items-center pt-40 w-full gap-10">
                 {events && (events.length > 0) && events.map((event, index) =>
-                    <div className="flex flex-grow max-w-[1100px] w-full h-[100px] md:h-[180px] bg-paper-pattern rounded-sm gap-1 md:gap-4 hover:shadow-[0_0_30px_0_rgba(255,255,255,0.2)] hover:cursor-pointer group" onClick={() => setSelected({
+                    <div className="flex flex-grow max-w-[1100px] w-full h-[100px] md:h-[180px] bg-paper-pattern rounded-sm gap-1 md:gap-4 hover:shadow-[0_0_30px_0_rgba(255,255,255,0.2)] hover:cursor-pointer group" onClick={(e) => setSelected({
                         id: event.guid,
                         name: event.name, 
                         location: event.location,
@@ -87,8 +95,8 @@ export const Events = () => {
                                 </div>
                             </div>
                             <div className="flex md:flex-grow justify-end items-end mr-3 md:mr-4 mb-1 md:mb-4 gap-2">
-                                <button className="flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center"><CheckIcon /></button>
-                                <button className="flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center"><XmarkIcon /></button>
+                                <button className="button flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center" onClick={(e) => {e.stopPropagation(); voteSubmitYes();}}><CheckIcon /></button>
+                                <button className="button flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center" onClick={(e) => {e.stopPropagation(); voteSubmitNo();}}><XmarkIcon /></button>
                             </div>
                         </div>
                     </div>
@@ -194,8 +202,8 @@ export const Events = () => {
                                         </div>
                                         <div className="flex flex-col md:flex-row flex-grow justify-end md:justify-normal gap-1 md:gap-4">
                                             <div className="flex md:flex-grow justify-end items-end gap-2">
-                                                <button className="flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center"><CheckIcon /></button>
-                                                <button className="flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center"><XmarkIcon /></button>
+                                                <button className="flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center" onClick={() => voteSubmitYes()}><CheckIcon /></button>
+                                                <button className="flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center" onClick={() => voteSubmitNo()}><XmarkIcon /></button>
                                             </div>
                                         </div>
                                     </div>            
