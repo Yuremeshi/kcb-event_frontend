@@ -6,6 +6,9 @@ import XmarkIcon from '../svg/xmarkSVG';
 import React, { useState, useEffect, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
+import Chart from 'chart.js/auto';
+import { CategoryScale } from 'chart.js/auto';
+import { Bar } from 'react-chartjs-2';
 
 const event1 = {"guid": 1, "name": "Church Picnic", "location": "Larz Anderson Park", "description": "Picnic hosted by Young Married Couples Group that will take place at Larz Anderson Park.  Come join us for good food, fun and games!", "image": "https://media-cdn.tripadvisor.com/media/photo-s/02/65/7a/27/filename-temple-of-love.jpg", "organization": "Young Married Couples Group", "total": 40, "going": 26, "notgoing": 14, "startTime": {"year": "2024", "month": "May", "day": "6", "starthour": "1:30 P.M. EDT", "endhour": "4:30 P.M. EDT"}, "created": "May 20, 2024", "modified": "May 20, 2024", "deleted": "false"};
 
@@ -94,9 +97,32 @@ export const Events = () => {
                                     Organization: { event.organization }
                                 </div>
                             </div>
-                            <div className="flex md:flex-grow justify-end items-end mr-3 md:mr-4 mb-1 md:mb-4 gap-2">
-                                <button className="button flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center" onClick={(e) => {e.stopPropagation(); voteSubmitYes();}}><CheckIcon /></button>
-                                <button className="button flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center" onClick={(e) => {e.stopPropagation(); voteSubmitNo();}}><XmarkIcon /></button>
+                            <div className="flex flex-col">
+                                <div>
+                                    <Bar
+                                        data={{
+                                            labels: ["Going", "Not Going"],
+                                            datasets: [
+                                                {
+                                                    
+                                                    data: [event.going, event.notgoing],
+                                                    backgroundColor: ["blue", "red"]
+                                                }
+                                            ]
+                                        }}
+                                        option={{
+                                            title:{
+                                                display: false,
+                                                text:'Going',
+                                                fontSize:12
+                                            }
+                                        }}
+                                    />
+                                </div>
+                                <div className="flex md:flex-grow justify-end items-end mr-3 md:mr-4 mb-1 md:mb-4 gap-2">
+                                    <button className="button flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center" onClick={(e) => {e.stopPropagation(); voteSubmitYes();}}><CheckIcon /></button>
+                                    <button className="button flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center" onClick={(e) => {e.stopPropagation(); voteSubmitNo();}}><XmarkIcon /></button>
+                                </div>
                             </div>
                         </div>
                     </div>
