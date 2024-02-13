@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Bar } from '@visx/shape';
 import { Group } from '@visx/group';
 import { scaleBand, scaleLinear } from '@visx/scale';
+import { events } from '../events/Events';
 
 const verticalMargin = 10;
 
@@ -9,11 +10,9 @@ export type BarsProps = {
     width: number;
     height: number;
     events?: Boolean;
-    going: number;
-    notgoing: number;
 };
 
-export default function Chart({ width, height, events = false, going, notgoing }: BarsProps) {
+export default function Chart({ width, height, events = false }: BarsProps) {
     const xMax = width;
     const yMax = height - verticalMargin;
 
@@ -42,7 +41,8 @@ export default function Chart({ width, height, events = false, going, notgoing }
           <rect width={width} height={height} fill="url(#teal)" rx={14} />
           <Group top={verticalMargin / 2}>
             {data.map((d) => {
-              const letter = getLetter(d);
+              const going = d.going;
+              const notgoing = d.notgoing;
               const barWidth = xScale.bandwidth();
               const barHeight = yMax - (yScale(getLetterFrequency(d)) ?? 0);
               const barX = xScale(letter);

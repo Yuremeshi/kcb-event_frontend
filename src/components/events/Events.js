@@ -5,14 +5,14 @@ import CheckIcon from '../svg/checkmarkSVG';
 import XmarkIcon from '../svg/xmarkSVG';
 import React, { useState, useEffect, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, Transition, Switch } from '@headlessui/react';
 // import Chart from 'chart.js/auto';
 // import { CategoryScale } from 'chart.js/auto';
 // import { Bar } from 'react-chartjs-2';
 
-const event1 = {"guid": 1, "name": "Church Picnic", "location": "Larz Anderson Park", "description": "Picnic hosted by Young Married Couples Group that will take place at Larz Anderson Park.  Come join us for good food, fun and games!", "image": "https://media-cdn.tripadvisor.com/media/photo-s/02/65/7a/27/filename-temple-of-love.jpg", "organization": "Young Married Couples Group", "total": 40, "going": 26, "notgoing": 14, "startTime": {"year": "2024", "month": "May", "day": "6", "starthour": "1:30 P.M. EDT", "endhour": "4:30 P.M. EDT"}, "created": "May 20, 2024", "modified": "May 20, 2024", "deleted": "false"};
+const event1 = {"guid": 1, "name": "Church Picnic", "location": "Larz Anderson Park", "description": "Picnic hosted by Young Married Couples Group that will take place at Larz Anderson Park.  Come join us for good food, fun and games!", "image": "https://media-cdn.tripadvisor.com/media/photo-s/02/65/7a/27/filename-temple-of-love.jpg", "organization": "Young Married Couples Group", "total": 40, "going": 26, "notgoing": 14, "startTime": {"year": "2024", "month": "May", "day": "6", "starthour": "1:30 P.M. EDT", "endhour": "4:30 P.M. EDT"}, "created": "May 20, 2024", "modified": "May 20, 2024", "deleted": "false", "isEnabled": false};
 
-const event2 = {"guid": 2, "name": "Six Flags Trip", "location": "Six Flags New England", "description": "A trip to Six Flags New England hosted by Young Adult Group 2.  Come join us for fun rides and overpriced theme park food.  The Harley Quinn ride is especially recommended!", "image": "https://upload.wikimedia.org/wikipedia/commons/9/9c/VR_Coaster_Train_at_Six_Flags_New_England.jpg", "organization": "Young Adult Group 2", "total": 23, "going": 12, "notgoing": 11, "startTime": {"year": "2024", "month": "June", "day": "24", "starthour": "8:00 A.M. EDT", "endhour": "9:00 P.M. EDT"}, "created": "April 20, 2024", "modified": "April 20, 2024", "deleted": "false"};
+const event2 = {"guid": 2, "name": "Six Flags Trip", "location": "Six Flags New England", "description": "A trip to Six Flags New England hosted by Young Adult Group 2.  Come join us for fun rides and overpriced theme park food.  The Harley Quinn ride is especially recommended!", "image": "https://upload.wikimedia.org/wikipedia/commons/9/9c/VR_Coaster_Train_at_Six_Flags_New_England.jpg", "organization": "Young Adult Group 2", "total": 23, "going": 12, "notgoing": 11, "startTime": {"year": "2024", "month": "June", "day": "24", "starthour": "8:00 A.M. EDT", "endhour": "9:00 P.M. EDT"}, "created": "April 20, 2024", "modified": "April 20, 2024", "deleted": "false", "isEnabled": false};
 
 export const events = [event1, event2];
 
@@ -30,6 +30,7 @@ export const Events = () => {
         going: '',
         notgoing: ''
     });
+    const [enabled, setEnabled] = useState(false)
 
     let [isOpen, setIsOpen] = useState(false)
 
@@ -69,20 +70,21 @@ export const Events = () => {
                         organization: event.organization,
                         total: event.total,
                         going: event.going,
-                        notgoing: event.notgoing
+                        notgoing: event.notgoing,
+                        isEnabled: event.isEnabled
                     })}>
                         <div className="flex">
                             <img className="h-full w-28 md:w-64 md:opacity-60 group-hover:opacity-100" src={ event.image } />
                         </div>
-                        <div className="flex flex-col justify-end mb-1 md:mb-2">
-                            <div className="md:text-xl">
+                        <div className="flex flex-col items-center justify-end mb-1 md:mb-2">
+                            <div className="md:text-2xl">
                                 { event.startTime.year }
-                            </div>
-                            <div className="text-3xl md:text-7xl">
-                                { event.startTime.day }
                             </div>
                             <div className="text-2xl md:text-4xl">
                                 { event.startTime.month }
+                            </div>
+                            <div className="text-3xl md:text-7xl">
+                                { event.startTime.day }
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row flex-grow justify-end md:justify-normal gap-1 md:gap-4">
@@ -97,7 +99,7 @@ export const Events = () => {
                                     Organization: { event.organization }
                                 </div>
                             </div>
-                            <div className="flex flex-col">
+                            <div className="flex flex-col flex-grow justify-end items-end">
                                 {/* <div>
                                     <Bar
                                         data={{
@@ -112,7 +114,7 @@ export const Events = () => {
                                                 }
                                             ]
                                         }}
-                                        option={{
+                                        option={{x
                                             title:{
                                                 display: false,
                                                 text:'Going',
@@ -122,8 +124,30 @@ export const Events = () => {
                                     />
                                 </div> */}
                                 <div className="flex md:flex-grow justify-end items-end mr-3 md:mr-4 mb-1 md:mb-4 gap-2">
-                                    <button className="button flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center" onClick={(e) => {e.stopPropagation(); voteSubmitYes();}}><CheckIcon /></button>
-                                    <button className="button flex border-2 border-sky-400 bg-sky-200 hover:bg-sky-400 p-1 md:p-2 rounded-lg w-8 md:w-12 h-8 md:h-12 justify-center items-center" onClick={(e) => {e.stopPropagation(); voteSubmitNo();}}><XmarkIcon /></button>
+                                    {/* <label className="relative inline-flex items-center justify-between cursor-pointer w-[156px]" onClick={(e) => {e.stopPropagation()}}>
+                                        <input type="checkbox" value="" className="sr-only peer" />
+                                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-sky-400 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-sky-300"></div>
+                                        <span className="ms-3 text-sm font-medium text-black peer-checked:hidden">Not Attending</span>
+                                        <span className="ms-3 text-sm font-medium text-black hidden peer-checked:block">Attending</span>
+                                    </label> */}
+                                    <Switch.Group>
+                                        <div className="flex items-center" onClick={(e) => {e.stopPropagation()}}>
+                                            <Switch.Label className="mr-4 cursor-pointer">{`${ enabled ? "Attending" : "Not Attending" }`}</Switch.Label>
+                                            <Switch
+                                            checked={enabled}
+                                            onChange={setEnabled}
+                                            className={`${
+                                                enabled ? 'bg-sky-300' : 'bg-gray-600'
+                                            } relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2`}
+                                            >
+                                            <span
+                                                className={`${
+                                                enabled ? 'translate-x-6' : 'translate-x-1'
+                                                } inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
+                                            />
+                                            </Switch>
+                                        </div>
+                                    </Switch.Group>
                                 </div>
                             </div>
                         </div>

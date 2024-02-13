@@ -14,7 +14,7 @@ export const Header = () => {
                 <div className="flex flex-grow justify-between items-center h-[60px]">
                     <a href="/" className="flex ml-1 md:ml-4 items-center gap-1 md:gap-2 p-1 border-[1px] hover:opacity-80 rounded-sm">
                         <img id="img" draggable="false" alt="" className="w-10 rounded-2xl" src="https://yt3.ggpht.com/ytc/APkrFKad9it9FBmbcNj2MIRXjrRNgsQIN2p-aIUQse84=s68-c-k-c0x00ffffff-no-rj" />
-                        <h1 className="font-himelody text-2xl md:text-3xl font-semibold">교육이부 Events</h1> 
+                        <h1 className="font-himelody text-2xl md:text-3xl font-semibold">교육2부 Events</h1> 
                     </a>
                     <div>
                         {isLoggedIn ?
